@@ -39,33 +39,35 @@ public class gameController : MonoBehaviour {
         yield return new WaitForSeconds(startWait);
         while (!Gameover)
         {
+            Boss_defeated.text = "";
             for (int i = 0; i < hazardCount; i++)
             {
                 GameObject hazard = hazards [Random.Range(0, hazards.Length)];
                 Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
                 Quaternion spawnRotation = Quaternion.identity;
                 Instantiate(hazard, spawnPosition, spawnRotation);
-                yield return new WaitForSeconds(waitTime);
-                SpawnBoss();
-                while (Boss_Spawned == true)
-                {
-                    yield return new WaitForSeconds(3);
-                }
-                yield return new WaitForSeconds(4);
-                Boss_defeated.text = "";
+                yield return new WaitForSeconds(waitTime);   
+            }
+            SpawnBoss();
+            while (Boss_Spawned)
+            {
+                yield return new WaitForSeconds(3);
             }
             yield return new WaitForSeconds(waveWait);
         }
     }
+
     public void RestartButtonActivate ()
     {
         RestartButton.SetActive(true);
     }
+
     public void addScore(int NewScoreValue)
     {
         score += NewScoreValue;
         updateScore();
     }
+
     void updateScore()
     {
         scoretext.text = "Score " + score;
@@ -79,25 +81,30 @@ public class gameController : MonoBehaviour {
             Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
             Quaternion spawnRotation = Quaternion.identity;
             Instantiate(Boss, spawnPosition, spawnRotation);
-            boss_score_ready += 250;
+            boss_score_ready += 250;            
         }
     }
+
     public void GameOver()
     {
         GameOverText.text = "Game Over";
         Boss_defeated.text = "";
         Gameover = true;
     }
+
     public void Congratz()
     {
         Boss_defeated.text = "Congratulations, you've defeated the commander! Prepare for the next wave.";
     }
+
     public void BossDED()
     {
         Boss_Spawned = false;
     }
+
     public void RestartGame ()
     {
         SceneManager.LoadScene("Some_Scene");
     }
+
 }
