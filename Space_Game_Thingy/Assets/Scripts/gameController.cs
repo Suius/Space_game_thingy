@@ -18,6 +18,7 @@ public class gameController : MonoBehaviour {
     private int score;
     private Boss_Battle bossbattle;
     public GameObject RestartButton;
+    public GameObject BackToMenuButton;
     public Text GameOverText;
     public Text Boss_defeated;
     private bool Gameover;
@@ -31,6 +32,7 @@ public class gameController : MonoBehaviour {
         Gameover = false;
         score = 0;
         RestartButton.SetActive(false);
+        BackToMenuButton.SetActive(false);
         updateScore();
        StartCoroutine (spawnWaves());
     }
@@ -60,6 +62,7 @@ public class gameController : MonoBehaviour {
     public void RestartButtonActivate ()
     {
         RestartButton.SetActive(true);
+        BackToMenuButton.SetActive(true);
     }
 
     public void addScore(int NewScoreValue)
@@ -106,5 +109,8 @@ public class gameController : MonoBehaviour {
     {
         SceneManager.LoadScene("Some_Scene");
     }
-
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("mainMenu");
+    }
 }
