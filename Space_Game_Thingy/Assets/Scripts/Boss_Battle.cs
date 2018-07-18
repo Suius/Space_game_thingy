@@ -25,6 +25,12 @@ public class Boss_Battle : MonoBehaviour
             return;
         }
         Destroy(other.gameObject);
+        if (other.CompareTag("Player"))
+        {
+            Instantiate(Player_explosion, other.transform.position, other.transform.rotation);
+            gamecontroller.GameOver();
+            gamecontroller.RestartButtonActivate();
+        }
         Lives--;
         if (Lives == 0)
         {

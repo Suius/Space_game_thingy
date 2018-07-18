@@ -30,7 +30,7 @@ public class DestroyByContact : MonoBehaviour
                 Instantiate(explosion, transform.position, transform.rotation);
             }
             gamecontroller.addScore (score_value);
-            if (other.tag == "Player")
+            if (other.CompareTag ("Player"))
             { 
                 Instantiate(Player_explosion, other.transform.position, other.transform.rotation);
                 gamecontroller.GameOver();
